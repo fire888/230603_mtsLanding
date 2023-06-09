@@ -27,54 +27,54 @@ export const createMan = asset => {
 
 
 
-    // const iterate = i => {
-    //     if (!arrActions[i]) {
-    //         i = 0
-    //     }
-    //
-    //     const currentAction = arrActions[i]
-    //
-    //     let prevAction
-    //     if (!arrActions[i - 1]) {
-    //         prevAction = arrActions[arrActions.length - 1]
-    //     } else {
-    //         prevAction = arrActions[i - 1]
-    //     }
-    //
-    //     console.log(currentAction.name, currentAction.duration, i)
-    //     prevAction.clip.fadeOut(.3)
-    //     setTimeout(() => { prevAction.clip.stop()}, 300)
-    //     currentAction.clip.play()
-    //
-    //
-    //     setTimeout(() => {
-    //         iterate(i + 1)
-    //     }, currentAction.duration - 300)
-    // }
-    //
-    // iterate(0)
+    const iterate = i => {
+        if (!arrActions[i]) {
+            i = 0
+        }
+    
+        const currentAction = arrActions[i]
+    
+        let prevAction
+        if (!arrActions[i - 1]) {
+            prevAction = arrActions[arrActions.length - 1]
+        } else {
+            prevAction = arrActions[i - 1]
+        }
+    
+        console.log(currentAction.name, currentAction.duration, i)
+        prevAction.clip.fadeOut(.3)
+        setTimeout(() => { prevAction.clip.stop()}, 300)
+        currentAction.clip.play()
+    
+    
+        setTimeout(() => {
+            iterate(i + 1)
+        }, currentAction.duration - 300)
+    }
+    
+    iterate(0)
 
 
     return {
         mesh: asset.scene,
         playAnimation: (animationKey, durationFade = .3, isRepeat = true, onComplete = () => {}) => {
-            clearTimeout(timeout)
+            // clearTimeout(timeout)
 
-            let prevAction = currentAction
-            if (prevAction) {
-                prevAction.clip.fadeOut(durationFade)
-                setTimeout(() => { prevAction.clip.stop() }, durationFade * 1000)
-            }
+            // let prevAction = currentAction
+            // if (prevAction) {
+            //     prevAction.clip.fadeOut(durationFade)
+            //     setTimeout(() => { prevAction.clip.stop() }, durationFade * 1000)
+            // }
 
-            currentAction = actions[animationKey]
-            currentAction.clip.play()
-            if (isRepeat) {
-                currentAction.clip.loop = THREE.LoopRepeat
-            } else {
-                currentAction.clip.loop = THREE.LoopOnce
-            }
-            currentAction.clip.clampWhenFinished = true
-            timeout = setTimeout(onComplete, currentAction.duration)
+            // currentAction = actions[animationKey]
+            // currentAction.clip.play()
+            // if (isRepeat) {
+            //     currentAction.clip.loop = THREE.LoopRepeat
+            // } else {
+            //     currentAction.clip.loop = THREE.LoopOnce
+            // }
+            // currentAction.clip.clampWhenFinished = true
+            // timeout = setTimeout(onComplete, currentAction.duration)
         },
         getCurrentActionDuration: () => currentAction.duration,
         update: (delta = .014) => {

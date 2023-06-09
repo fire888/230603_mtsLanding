@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js"
-//import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 export const createStudio = () => {
     const CAM_POS = [0, 3, 10]
@@ -30,8 +30,8 @@ export const createStudio = () => {
     const lightA = new THREE.AmbientLight( 0x404040 )
     scene.add( lightA );
 
-    //const controls = new OrbitControls(camera, renderer.domElement)
-    //controls.update()
+    const controls = new OrbitControls(camera, renderer.domElement)
+    controls.update()
 
     window.onresize = function () {
 
